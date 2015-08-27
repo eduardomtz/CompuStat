@@ -10,7 +10,7 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Funcion Inversa"),
+  titlePanel("Box Muller"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
@@ -19,12 +19,13 @@ shinyUI(fluidPage(
                   "Number of bins:",
                   min = 1,
                   max = 5000,
-                  value = 30)
+                  value = 2000)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("distPlot"),
+      plotOutput("distPlotY")
     )
   ),
   
