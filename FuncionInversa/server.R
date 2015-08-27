@@ -8,26 +8,36 @@
 library(shiny)
 
 shinyServer(function(input, output) {
-
-  table1 <- matrix(log((1-runif(20))^-1), 20)
   
   output$distPlot <- renderPlot({
 
     # generate bins based on input$bins from ui.R
-    x    <- 1/input$bins*log((1-runif(1000))^-1)
-    #bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
+    U1 <- runif(input$bins)
+    U2 <- runif(input$bins)
+    X <- sqrt(-2*log(U2))*cos(2*360*U1)
+    bins <- 25
+    
     # draw the histogram with the specified number of bins
-    hist(x, col = 'darkgray', border = 'white')
+    hist(X, breaks=bins, col = 'darkgray', border = 'white')
     
   })
   
-  
-  
-  output$cdk1 <- renderTable({
-    table1 <- table1 * 1/input$bins
+  output$distPlotY <- renderPlot({
+    
+    # generate bins based on input$bins from ui.R
+    U1 <- runif(input$bins)
+    U2 <- runif(input$bins)
+    Y <- sqrt(-2*log(U2))*sin(2*360*U1)
+    bins <- 25
+    
+    # draw the histogram with the specified number of bins
+    hist(Y, breaks=bins, col = 'darkgray', border = 'white')
     
   })
+  
+  #output$cdk1 <- renderTable({
+  #  table1 <- table1 * 1/input$bins
+  #})
   
 
 })
