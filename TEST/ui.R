@@ -10,32 +10,25 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Monte Carlo"),
+  titlePanel("TEST Funcion Inversa"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
       sliderInput("bins",
-                  "n:",
+                  "Number of bins:",
                   min = 1,
                   max = 5000,
-                  value = 300)
+                  value = 30)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("normal"),
-      
-      plotOutput("MonteCarlo"),
-      
-      textOutput("text1"),
-      plotOutput("distPlot"),
-      
-      textOutput("text2"),
-      plotOutput("distPlot2"),
-      
-      textOutput("text3"),
-      plotOutput("distPlot3")
+      plotOutput("distPlot")
     )
-  )
+  ),
+  
+  mainPanel(
+    tableOutput("cdk1")
+    )
 ))

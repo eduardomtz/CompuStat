@@ -67,6 +67,18 @@ shinyServer(function(input, output) {
     curve(q3)
   })
   
+  output$normal <- renderPlot({
+    t <- runif(input$bins,0,1)
+    y <- normalStandard(t)
+    curve(normalStandard, from=-2, to=2)
+  })
+  
+  normalStandard <- function(x)
+  {
+    m <- length(x)
+    ((1/(2*pi)^1)*exp(x^2)/2)
+  }
+  
   output$text3 <- renderText({ 
     t = runif(input$bins,0,1)
     r = q3(t)
