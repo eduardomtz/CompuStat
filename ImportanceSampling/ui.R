@@ -10,7 +10,7 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("TEST Funcion Inversa"),
+  titlePanel("Funcion Inversa"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(

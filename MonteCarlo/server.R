@@ -70,7 +70,7 @@ shinyServer(function(input, output) {
   output$normal <- renderPlot({
     D <- runif(input$bins,0,1)
     y <- t(sapply(D,normalStandard))
-    plot(D,y)
+    plot(D,y,typ='l')
   })
   
   normalStandard <- function(x)
