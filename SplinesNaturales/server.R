@@ -146,15 +146,16 @@ shinyServer(function(input, output) {
     lines(datos$X,datos$Y,col="gray")
     points(datos$XHueco,datos$Yspline,col="brown",pch='+', cex = 2)
     points(datos$XHueco,datos$Yventana,col="red",pch=4, cex = 2)
-    legend(-1, 1.9, c("spline", "datos", "ref", "llenado spline", "llenado ventana"), 
-           col = c("darkgreen", "black", "gray", "brown","red"),
-           text.col = "green4", lty = c(2, -1, 1,1,1), pch = c(NA,NA,NA, '+', 4),
-           merge = TRUE, bg = "gray90")
+    
+    #legend(10, 6, c("spline", "datos", "ref", "llenado spline", "llenado ventana"), 
+    #       col = c("darkgreen", "black", "gray", "brown","red"),
+    #       text.col = "green4", lty = c(2, -1, 1,1,1), pch = c(NA,NA,NA, '+', 4),
+    #       merge = TRUE, bg = "gray90")
   })
   
   output$Camino <- renderPlot({
     
-    file <- read.csv(file=input$archivo,head=TRUE,sep=",")
+    file <- read.csv(file="Camino.csv",head=TRUE,sep=",")
     
     Xreal <- as.vector(as.matrix(file['Distancia']))
     Yreal <- as.vector(as.matrix(file['Altura']))
