@@ -15,16 +15,12 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      #actionButton("goButton", "Go!"),
       sliderInput("bins",
                   "Numero de atributos:",
                   min = 3,
                   max = 30,
-                  value = 10)#,
-      #textInput("archivo", "Nombre del archivo:", "Camino.csv")
+                  value = 10)
     ),
-
-    # Show a plot of the generated distribution
     
     mainPanel(
       h2("Tabla de atributos"),
@@ -37,5 +33,3 @@ shinyUI(fluidPage(
     )
   )
 ))
-
-#runGitHub( "<your repository name>", "<your user name>") 

@@ -107,7 +107,7 @@ shinyServer(function(input, output) {
       Yventana[j] <- (YY[i-3] + YY[i-2] + YY[i-1])/3
       j <- j + 1
     }
-    #return (X,Y,Xprima,Yprima, XHueco, YSpline,Yventana)
+    
     out <- list(X=X,Y=Y,Xprima=Xprima,Yprima=Yprima, XHueco=XHueco, Yspline=Yspline,Yventana=Yventana)
     out
   }
@@ -144,13 +144,11 @@ shinyServer(function(input, output) {
     plot(datos$Xprima,datos$Yprima,typ='l',col="darkgreen")
     points(datos$X,datos$Y,col="black")
     lines(datos$X,datos$Y,col="gray")
-    points(datos$XHueco,datos$Yspline,col="brown",pch='+', cex = 2)
+    points(datos$XHueco,datos$Yspline,col="blue",pch='+', cex = 2)
     points(datos$XHueco,datos$Yventana,col="red",pch=4, cex = 2)
     
-    #legend(10, 6, c("spline", "datos", "ref", "llenado spline", "llenado ventana"), 
-    #       col = c("darkgreen", "black", "gray", "brown","red"),
-    #       text.col = "green4", lty = c(2, -1, 1,1,1), pch = c(NA,NA,NA, '+', 4),
-    #       merge = TRUE, bg = "gray90")
+    legend("topright", c("spline", "ventana"), lty = 1, 
+           col = c("blue", "red"), pch = c('+', 'X'), bty='n', cex=1)
   })
   
   output$Camino <- renderPlot({
@@ -160,7 +158,6 @@ shinyServer(function(input, output) {
     Xreal <- as.vector(as.matrix(file['Distancia']))
     Yreal <- as.vector(as.matrix(file['Altura']))
     
-    #subset(DF, ID %in% c(2,5))
     ele <- c(1,8,20,27,36,43,50,55,60,71)
     
     X <- as.vector(as.matrix(subset(file, ID %in% ele, select = Distancia)))
@@ -182,7 +179,6 @@ shinyServer(function(input, output) {
     {
       Yprima[i] <- spl(X,Y,s,Xprima[i])
     }
-    
     plot(Xreal,Yreal,typ='l',col="brown")
     lines(Xprima,Yprima,col="darkgreen")
     points(X,Y)
