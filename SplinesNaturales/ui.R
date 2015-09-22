@@ -31,7 +31,9 @@ shinyUI(fluidPage(
       tableOutput('tablaDatos'),
       h2("Representacion Grafica"),
       plotOutput("distPlot"),
+      h2("Uso para calculo de subrasante de caminos"),
       plotOutput("Camino")
+      
     )
   )
 ))
