@@ -104,7 +104,7 @@ shinyServer(function(input, output) {
     for(i in XHueco)
     {
       Yspline[j] <- spl(XX,YY,s,i)
-      Yventana[j] <- (YY[i-3] + YY[i-2] + YY[i-1])/3
+      Yventana[j] <- (Y[i-2] + Y[i-1] + Y[i+1])/3
       j <- j + 1
     }
     
@@ -113,7 +113,7 @@ shinyServer(function(input, output) {
   }
   
   dataY <- reactive(runif(input$bins, 1, 100))
-  valores <- reactive(sample(2:(input$bins-1),input$bins*.2))
+  valores <- reactive(sample(2:(input$bins-1),input$bins*.25))
   
   output$tablaDatos <- renderTable({
     datos = valoresXY()
