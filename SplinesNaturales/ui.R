@@ -25,9 +25,9 @@ shinyUI(fluidPage(
     mainPanel(
       h2("Tabla de atributos"),
       tableOutput('tablaDatos'),
-      h2("Representacion Grafica"),
+      h2("Representacion grafica"),
       plotOutput("distPlot"),
-      h2("Uso para calculo de subrasante de caminos"),
+      h2("Uso para calculo de perfil en caminos"),
       plotOutput("Camino")
       
     )

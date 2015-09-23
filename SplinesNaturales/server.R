@@ -179,8 +179,11 @@ shinyServer(function(input, output) {
     {
       Yprima[i] <- spl(X,Y,s,Xprima[i])
     }
-    plot(Xreal,Yreal,typ='l',col="brown")
+    plot(Xreal,Yreal, typ='l',col="brown",
+         xlab="Distancia", ylab="Altura",)
     lines(Xprima,Yprima,col="darkgreen")
     points(X,Y)
+    legend("bottomright", c("relieve", "spline"), lty = 1, 
+           col = c("brown", "darkgreen"), bty='n', cex=1)
   })
 })
