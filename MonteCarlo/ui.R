@@ -19,13 +19,11 @@ shinyUI(fluidPage(
                   "n:",
                   min = 1,
                   max = 5000,
-                  value = 300)
+                  value = 2000)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("normal"),
-      
       plotOutput("MonteCarlo"),
       
       textOutput("text1"),
@@ -35,7 +33,9 @@ shinyUI(fluidPage(
       plotOutput("distPlot2"),
       
       textOutput("text3"),
-      plotOutput("distPlot3")
+      plotOutput("distPlot3"),
+      
+      plotOutput("normal")
     )
   )
 ))
