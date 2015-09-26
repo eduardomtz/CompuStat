@@ -39,10 +39,10 @@ shinyServer(function(input, output) {
       PhiXCrudo <- sapply(X,exponencial) #evaluate phi at each X_i
       estim <- mean(2*PhiXCrudo) #Estimate of int a^b
       
-      K <- 1-exp(-2*lam)
-      inversa <- 1/lam*log((1-K*Ximp)^-1)
-      #fun <- function(x) dexp(x)/(1-exp(-2*lam))
-      fun <- function(x) dexp(x)/inversa
+      #K <- 1-exp(-2*lam)
+      #inversa <- 1/lam*log((1-K*Ximp)^-1)
+      fun <- function(x) dexp(x)/(1-exp(-2*lam))
+      #fun <- function(x) dexp(x)/inversa
       phi <- function(x) exponencial(x)/fun(x)
       PhiXImportance <- sapply(X,phi)
       importance = mean(PhiXImportance)
