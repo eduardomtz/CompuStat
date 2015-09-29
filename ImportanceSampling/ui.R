@@ -10,30 +10,41 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Funcion Inversa"),
+  titlePanel("Monte Carlo vs Importance Sampling"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
       sliderInput("uni",
-                  "Uniformes:",
-                  min = 100,
-                  max = 500,
-                  value = 100),
-      sliderInput("lam",
-                  "lambda:",
-                  min = 0.1,
-                  max = 2,
+                  "Estimaciones:",
+                  min = 0,
+                  max = 100,
+                  value = 20),
+      sliderInput("alpha",
+                  "alpha:",
+                  min = 0.01,
+                  max = 1,
+                  value = 0.05),
+      sliderInput("lam_exp",
+                  "lambda exp:",
+                  min = 0.01,
+                  max = 1,
+                  value = 0.85),
+      sliderInput("lam_dens",
+                  "lambda dis:",
+                  min = 0.01,
+                  max = 1,
                   value = 1)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
+      #tableOutput("cdk1"),
+      h1("Intervalos de confianza"),
+      plotOutput("mc"),
+      h1("Densidad de estimaciones"),
+      plotOutput("is"),
       plotOutput("distPlot")
     )
-  ),
-  
-  mainPanel(
-    tableOutput("cdk1")
-    )
+  )
 ))
