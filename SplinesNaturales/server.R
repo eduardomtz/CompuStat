@@ -101,10 +101,16 @@ shinyServer(function(input, output) {
     Yspline = c()
     Yventana = c()
     j <- 1
+    YventanaPrima = c()
+    for(i in 1:length(Y))
+    {
+      YventanaPrima = c(YventanaPrima,Y[i])
+    }
     for(i in XHueco)
     {
       Yspline[j] <- spl(XX,YY,s,i)
-      Yventana[j] <- (Y[i-2] + Y[i-1] + Y[i+1])/3
+      YventanaPrima[i] <- (YventanaPrima[i-3] + YventanaPrima[i-2] + YventanaPrima[i-1])/3
+      Yventana[j] <- YventanaPrima[i]
       j <- j + 1
     }
     
@@ -113,7 +119,7 @@ shinyServer(function(input, output) {
   }
   
   dataY <- reactive(runif(input$bins, 1, 100))
-  valores <- reactive(sample(2:(input$bins-1),input$bins*.25))
+  valores <- reactive(sample(4:(input$bins-1),input$bins*.25))
   
   output$tablaDatos <- renderTable({
     datos = valoresXY()
@@ -180,7 +186,7 @@ shinyServer(function(input, output) {
       Yprima[i] <- spl(X,Y,s,Xprima[i])
     }
     plot(Xreal,Yreal, typ='l',col="brown",
-         xlab="Distancia", ylab="Altura",)
+         xlab="Distancia", ylab="Altura")
     lines(Xprima,Yprima,col="darkgreen")
     points(X,Y)
     legend("bottomright", c("relieve", "spline"), lty = 1, 
