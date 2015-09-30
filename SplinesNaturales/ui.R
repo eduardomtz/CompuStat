@@ -16,7 +16,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       sliderInput("bins",
-                  "Numero de atributos:",
+                  "Numero de registros:",
                   min = 3,
                   max = 30,
                   value = 10)
