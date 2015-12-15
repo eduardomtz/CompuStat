@@ -58,15 +58,60 @@ shinyServer(function(input, output) {
     beta
   }
   
-  
-  valoresXY <- function()
-  {
-    X <- seq(1,input$bins,1)
+  #coeficientes
+  coeficientes <- function(x,y,s,alpha){
+    X <- seq(1,input$bins,1) 
     Y <- dataY()
     XX <- c()
     YY <- c()
-    XHueco = c()
-    for(i in valores())
+    XHueco <- c()
+    valor <- valores()
+    for(i in valor)
+    {
+      Y[i] <- NA
+    }
+    for(i in 1:length(Y))
+    {
+      if(!is.na(Y[i]))
+      {
+        XX <- c(XX, X[i])
+        YY <- c(YY, Y[i])
+      }
+    }
+    
+    s <- spcoef(XX,YY)
+    
+    n <- length(XX)
+    RES <- matrix(nrow=n,ncol=6)
+    for (i in 1:(n-1))
+    {
+      hi <- XX[i+1] - XX[i]
+      
+      D <- s[i+1]/(6*hi) - s[i]/(6*hi)
+      C <- 3*s[i]/(6*hi)*XX[i+1]-3*s[i+1]/(6*hi)*XX[i]
+      B <- 3*s[i+1]/(6*hi)*XX[i]-3*s[i]/(6*hi)*(XX[i+1]^2)+YY[i+1]/hi-s[i]*hi/6-YY[i]/hi+s[i]*hi/6
+      A <- s[i]/(6*hi)*(XX[i+1]^3)-s[i+1]/(6*hi)*(XX[i]^3)-(YY[i+1]/hi-s[i+1]*hi/6)*XX[i]+(YY[i]/hi-s[i]*hi/6)*XX[i+1]
+      
+      RES[i,1] <- XX[i]
+      RES[i,2] <- XX[i+1]
+      RES[i,3] <- A
+      RES[i,4] <- B
+      RES[i,5] <- C
+      RES[i,6] <- D
+    }
+    RES
+  }
+  
+  
+  valoresXY <- function()
+  {
+    X <- seq(1,input$bins,1) 
+    Y <- dataY()
+    XX <- c()
+    YY <- c()
+    XHueco <- c()
+    valor <- valores()
+    for(i in valor)
     {
       Y[i] <- NA
     }
@@ -114,12 +159,18 @@ shinyServer(function(input, output) {
       j <- j + 1
     }
     
-    out <- list(X=X,Y=Y,Xprima=Xprima,Yprima=Yprima, XHueco=XHueco, Yspline=Yspline,Yventana=Yventana)
+    out <- list(X=X,Y=Y,Xprima=Xprima,Yprima=Yprima, XHueco=XHueco, Yspline=Yspline,Yventana=Yventana)#, coef = s)
     out
   }
   
   dataY <- reactive(runif(input$bins, 1, 100))
   valores <- reactive(sample(4:(input$bins-1),input$bins*.25))
+  
+  output$tablaCoeficientes <- renderTable({
+    M <- coeficientes()
+    colnames(M) <- c('X', 'X+1', 'A', 'B', 'C', 'D')
+    M
+  })
   
   output$tablaDatos <- renderTable({
     datos = valoresXY()

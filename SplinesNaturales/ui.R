@@ -23,8 +23,10 @@ shinyUI(fluidPage(
     ),
     
     mainPanel(
-      h2("Tabla de atributos"),
+      h2("Tabla de datos"),
       tableOutput('tablaDatos'),
+      h3("Coeficientes de polinomios"),
+      tableOutput('tablaCoeficientes'),
       h2("Representacion grafica"),
       plotOutput("distPlot"),
       h2("Uso para calculo de perfil en caminos"),
