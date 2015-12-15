@@ -17,29 +17,6 @@ summary(data)
 # Recall obj ~~ L(theta|X)prior(X)
 # But as we want logarithms, we have log(obj) = log(L) + log(prior)
 
-# objdens <- function(data, theta){
-#   m <- nrow(data)
-#   print(theta) 
-#   Y <- data[,5]  # In this example is redundant but helps to generalise
-#   X <- data
-#   # Compute loglikelihood
-#   lkh <- 0.0
-#   for (i in 1:m)
-#   {
-#     mu <- 0.0
-#     for (j in 1:4)
-#     {
-#       mu <- mu + theta[j]*X[i,j]
-#     }
-#     lkh <- lkh + -0.5*((Y[i]-mu)/theta[5])^2-log(theta[5])
-#     #printf("L:%f,m:%f","mu",lkh);
-#   }
-#   # Compute logprior
-#   logprior <- dnorm(theta[1], 1,1) + dnorm(theta[2], 3,1) + dnorm(theta[3], 4,2) + dnorm(theta[4], 1,3) + dgamma(theta[5], 5, 1/40)
-#   # Log of target density
-#   return lkh + logprior
-# }
-
 cppFunction('
             double objdens(NumericMatrix data, NumericVector theta){
             double lkh, logprior, mu;
